@@ -1,4 +1,4 @@
-import os
+import subprocess
 import sqlite3
 from flask import Flask, request
 
@@ -19,10 +19,10 @@ def search():
 
 @app.route("/ping")
 def ping():
-    # VULNERABILITY: Command Injection - user input passed to os.system
+    # FIXED: Using subprocess.run with list arguments instead of os.system
     host = request.args.get("host", "localhost")
-    os.system(f"ping -c 1 {host}")
-    return f"Pinged {host}"
+    result = subprocess.run(["ping", "-c", "1", host], capture_output=True, text=True)
+    return f"Pinged {host}: {result.stdout}"
 
 @app.route("/")
 def index():
