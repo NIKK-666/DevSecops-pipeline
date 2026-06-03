@@ -1,0 +1,11 @@
+rules:
+  - id: no-os-system
+    pattern: os.system(...)
+    message: >-
+      Do not use os.system() - it is vulnerable to command injection.
+      Use subprocess.run() with a list of arguments instead.
+    languages: [python]
+    severity: ERROR
+    metadata:
+      category: security
+      confidence: HIGH
