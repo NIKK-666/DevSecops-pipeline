@@ -153,3 +153,7 @@ AWS_PRODUCTION_KEY = "AKIAIOSFODNN7EXAMPLE"
 
 * 
 **Declarative Control:** Codified security constraints as immutable, versioned infrastructure components using GitHub Actions YAML definitions.
+
+
+  <img width="663" height="448" alt="image" src="https://github.com/user-attachments/assets/1439bd3e-adbd-4b07-99e8-4ea0c20f8af0" />
+
