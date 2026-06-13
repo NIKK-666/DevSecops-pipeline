@@ -38,46 +38,37 @@ The pipeline implements a multi-tiered security gate utilizing three distinct op
 
 ### 1. Static Application Security Testing (SAST) — Semgrep
 
-* 
-**Purpose:** Inspects source code to trace data flows and isolate behavioral patterns that point to critical design flaws.
+* **Purpose:** Inspects source code to trace data flows and isolate behavioral patterns that point to critical design flaws.
 
 
-* 
-**Core Function:** Scans for application-layer flaws such as SQL Injections and dangerous command executions.
+* **Core Function:** Scans for application-layer flaws such as SQL Injections and dangerous command executions.
 
 
-* 
-**Reporting:** Formats execution telemetry into standardized **SARIF** (Static Analysis Results Interchange Format) logs, instantly parsing the findings straight into GitHub's native Code Scanning dashboard.
+* **Reporting:** Formats execution telemetry into standardized **SARIF** (Static Analysis Results Interchange Format) logs, instantly parsing the findings straight into GitHub's native Code Scanning dashboard.
 
 
 
 ### 2. Software Composition Analysis (SCA) — Trivy
 
-* 
-**Purpose:** Scans the project file-system to build a dependency inventory tree and cross-reference public CVE databases.
+* **Purpose:** Scans the project file-system to build a dependency inventory tree and cross-reference public CVE databases.
 
 
-* 
-**Core Function:** Targets third-party library tracking hazards, flagging legacy dependencies embedded with known vulnerabilities.
+* **Core Function:** Targets third-party library tracking hazards, flagging legacy dependencies embedded with known vulnerabilities.
 
 
-* 
-**Fail Gate:** Programmed to trigger an exit code (`exit-code: 1`) on high-risk findings, systematically breaking the build step to stop problematic payloads from expanding.
+* **Fail Gate:** Programmed to trigger an exit code (`exit-code: 1`) on high-risk findings, systematically breaking the build step to stop problematic payloads from expanding.
 
 
 
 ### 3. Secrets Detection — Gitleaks
 
-* 
-**Purpose:** Prevents credential leakage by scanning git history for hardcoded signatures.
+* **Purpose:** Prevents credential leakage by scanning git history for hardcoded signatures.
 
 
-* 
-**Core Function:** Uses regex matching to inspect past commits for tracking hazards like plaintext passwords, high-entropy API tokens, or AWS access vectors.
+* **Core Function:** Uses regex matching to inspect past commits for tracking hazards like plaintext passwords, high-entropy API tokens, or AWS access vectors.
 
 
-* 
-**Depth:** Configured with a deep repository clone strategy (`fetch-depth: 0`) to audit structural changes throughout historical timelines rather than just current file snapshots.
+* **Depth:** Configured with a deep repository clone strategy (`fetch-depth: 0`) to audit structural changes throughout historical timelines rather than just current file snapshots.
 
 
 
@@ -87,12 +78,10 @@ The pipeline implements a multi-tiered security gate utilizing three distinct op
 
 To elevate this workflow from a monitoring utility into a defensive quality gate, the pipeline integrates with GitHub's branch protection policies:
 
-1. 
-**Mandatory Build Passing:** Merging into the protected target branch is programmatically blocked unless all security scanning jobs finish cleanly with a zero failure status.
+1. **Mandatory Build Passing:** Merging into the protected target branch is programmatically blocked unless all security scanning jobs finish cleanly with a zero failure status.
 
 
-2. 
-**Left-Shift Validation:** Developers receive real-time, granular feedback on security flaws inside their pull requests before modifications get introduced into production lines.
+2. **Left-Shift Validation:** Developers receive real-time, granular feedback on security flaws inside their pull requests before modifications get introduced into production lines.
 
 
 
@@ -143,16 +132,13 @@ AWS_PRODUCTION_KEY = "AKIAIOSFODNN7EXAMPLE"
 
 ## 📊 Key Takeaways & Learnings
 
-* 
-**Shift-Left Implementation:** Standardized security checks directly inside developer build cycles to minimize the lifecycle cost of software remediation.
+* **Shift-Left Implementation:** Standardized security checks directly inside developer build cycles to minimize the lifecycle cost of software remediation.
 
 
-* 
-**Unified Dashboard Ingestion:** Centralized disparate data logs (SAST/SCA) into a single, high-fidelity native view utilizing standard SARIF outputs.
+* **Unified Dashboard Ingestion:** Centralized disparate data logs (SAST/SCA) into a single, high-fidelity native view utilizing standard SARIF outputs.
 
 
-* 
-**Declarative Control:** Codified security constraints as immutable, versioned infrastructure components using GitHub Actions YAML definitions.
+* **Declarative Control:** Codified security constraints as immutable, versioned infrastructure components using GitHub Actions YAML definitions.
 
 
   <img width="663" height="448" alt="image" src="https://github.com/user-attachments/assets/1439bd3e-adbd-4b07-99e8-4ea0c20f8af0" />
